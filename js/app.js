@@ -8,18 +8,23 @@ function sumaTotal (acumulado, totalParcial) {
     return acumulado
 }
 
+function compra(comprar) {
+    comprar = prompt('Desea agregar productos al carro (por SI presione S o s)').toLowerCase()
+    return comprar
+}
 
-let comprar = prompt('Desea agregar productos al carro (por SI presione S o s)').toLowerCase()
+// let comprar = prompt('Desea agregar productos al carro (por SI presione S o s)').toLowerCase()
+let comprar
 let producto = 0
 let totalParcial = 0
 let acumulado = 0
 
 
-while (comprar == 's') {
+while (compra(comprar) == 's') {
     producto = sumaCantidad(producto)
     totalParcial = Number(prompt('Ingrese el precio del producto seleccionado'))
     acumulado = sumaTotal(acumulado, totalParcial)
-    comprar = prompt('Desea seguir agregando productos al carro (por SI presione S o s)').toLowerCase()
+    // comprar = prompt('Desea seguir agregando productos al carro (por SI presione S o s)').toLowerCase()
 
 }
 
