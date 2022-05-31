@@ -1,4 +1,3 @@
-
 // SIMULADOR
 
 let total = 0
@@ -20,12 +19,12 @@ const carrito = []
 function SeguirComprando () {
     opcion = prompt('Ingrese la moneda que desea comprar: Dolar o Euro.').toLowerCase()
     switch (opcion) {
-        case 'dolar':
+        case divisa1[0]:
             cant = Cantidad()
             Operacion(divisa1[1])
             carrito.push('Selecciono ' + cant + ' dolar/dolares')
             break;
-        case 'euro':
+        case divisa2[0]:
             cant = Cantidad()
             Operacion(divisa2[1])
             carrito.push('Selecciono ' + cant + ' euro/euros')
