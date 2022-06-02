@@ -41,25 +41,7 @@ function SeguirComprando () {
     }
 }
 
-<<<<<<< HEAD
-let comprar
-let producto = 0
-let totalParcial = 0
-let acumulado = 0
-
-
-while (compra(comprar) == 's') {
-    producto = sumaCantidad(producto)
-    totalParcial = Number(prompt('Ingrese el precio del producto seleccionado'))
-    acumulado = sumaTotal(acumulado, totalParcial)
-}
-
-console.log('Usted tiene ' + producto + ' productos en el carro');
-console.log('El total de su compra es de ' + acumulado + ' pesos');
-
-=======
 SeguirComprando()
->>>>>>> rama3
 
 if (total != 0) {
     console.log('El total a pagar es de ' + total + ' pesos');
