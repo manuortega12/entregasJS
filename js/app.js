@@ -1,7 +1,38 @@
 // SIMULADOR
 
 let total = 0
-let monedas = [ {tc: "dolar", valor:  200} , {tc: "euro", valor: 210}]
+
+class Moneda {
+    constructor(divisa, precio) {
+        this.divisa = divisa
+        this.precio = precio
+    }
+}
+
+const moneda1 = new Moneda('dolar', 200)
+const moneda2 = new Moneda('euro', 210)
+
+
+const divisas = [moneda1, moneda2]
+const contenedor = document.querySelector('#contenedor')
+
+
+const verMonedas = () => {
+    divisas.forEach((divisa) => {
+        const card = document.createElement('div')
+        card.className = 'card'
+        card.innerHTML = `
+            <h3 class='cardTitle'>${divisa.divisa}</h3>
+            <span class='cardPrice'>$${divisa.precio}</span>
+            <button class='boton'>Seleccione</button>
+        `
+        contenedor.append(card)
+    })
+    
+}
+
+const botonVer = document.querySelector('#verProd')
+botonVer.addEventListener('click', verMonedas)
 
 
 function Cantidad(cant) {
@@ -18,14 +49,14 @@ const carrito = []
 function SeguirComprando () {
     opcion = prompt('Ingrese la moneda que desea comprar: Dolar o Euro.').toLowerCase()
     switch (opcion) {
-        case monedas[0].tc:
+        case moneda1.divisa:
             cant = Cantidad()
-            Operacion(monedas[0].valor)
+            Operacion(moneda1.precio)
             carrito.push('Selecciono ' + cant + ' dolar/dolares')
             break;
-        case monedas[1].tc:
+        case moneda2.divisa:
             cant = Cantidad()
-            Operacion(monedas[1].valor)
+            Operacion(moneda2.precio)
             carrito.push('Selecciono ' + cant + ' euro/euros')
             break;
         default:
@@ -46,3 +77,6 @@ SeguirComprando()
 if (total != 0) {
     console.log('El total a pagar es de ' + total + ' pesos');
 }
+
+
+
