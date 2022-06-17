@@ -1,82 +1,56 @@
-// SIMULADOR
 
-let total = 0
-
-class Moneda {
-    constructor(divisa, precio) {
-        this.divisa = divisa
-        this.precio = precio
-    }
-}
-
-const moneda1 = new Moneda('dolar', 200)
-const moneda2 = new Moneda('euro', 210)
-
-
-const divisas = [moneda1, moneda2]
-const contenedor = document.querySelector('#contenedor')
-
-
-const verMonedas = () => {
-    divisas.forEach((divisa) => {
-        const card = document.createElement('div')
-        card.className = 'card'
-        card.innerHTML = `
-            <h3 class='cardTitle'>${divisa.divisa}</h3>
-            <span class='cardPrice'>$${divisa.precio}</span>
-            <button class='boton'>Seleccione</button>
-        `
-        contenedor.append(card)
-    })
-    
-}
-
-const botonVer = document.querySelector('#verProd')
-botonVer.addEventListener('click', verMonedas)
-
-
-function Cantidad(cant) {
-    return cant = Number(prompt('Ingrese la cantidad que desea comprar.'))
-}
-
-function Operacion(divisa) {
-    total = cant * divisa + total
-    return total
-}
-
+const divisas = [dolarUSA, euro, real, libraEsterlina, yenJapan, yuanChina]
 const carrito = []
 
-function SeguirComprando () {
-    opcion = prompt('Ingrese la moneda que desea comprar: Dolar o Euro.').toLowerCase()
-    switch (opcion) {
-        case moneda1.divisa:
-            cant = Cantidad()
-            Operacion(moneda1.precio)
-            carrito.push('Selecciono ' + cant + ' dolar/dolares')
-            break;
-        case moneda2.divisa:
-            cant = Cantidad()
-            Operacion(moneda2.precio)
-            carrito.push('Selecciono ' + cant + ' euro/euros')
-            break;
-        default:
-            console.log('Por favor ingrese una opcion correcta..');
-            break;
-        }
+const divisasListConteiner = document.querySelector('.menu')
+const cardName = document.querySelector('.cardName')
+const cardId = document.querySelector('.cardId')
+const cardCTA = document.querySelector('.cardCTA')
+const carroContainer = document.querySelector('.carroContainer')
+ 
 
-    if (confirm('Desea seguir comprando?')) {
-        SeguirComprando()
-    } else {
-        console.log('Finalizo compra.');
-        console.log(String(carrito));
-    }
+const monedaButton = document.querySelector('.menuTab')
+
+
+const renderizarListDivisas = () => {
+    divisas.forEach((divisa) =>{
+        const monedaButton = document.createElement('button')
+        monedaButton.className = 'menuTab'
+        monedaButton.setAttribute('data-id', divisa.id)
+        monedaButton.innerHTML = `
+            <span class='menuTabTex'>${divisa.divisa} </span>
+        `
+        divisasListConteiner.append(monedaButton)
+    })
+    agregarListenerBotones()
 }
 
-SeguirComprando()
+const renderizarDatosDivisas = (e) => {
+    const divisaIdSelected = e.target.closest('.menuTab').getAttribute('data-id')
+    const divisaSelected = divisas.find((divisa) => divisa.id == divisaIdSelected)
 
-if (total != 0) {
-    console.log('El total a pagar es de ' + total + ' pesos');
+    cardName.textContent = divisaSelected.divisa
+    cardId.textContent = `Moneda #${divisaSelected.id}`
+    cardCTA.setAttribute('data-id', divisaSelected.id)
 }
 
 
+agregarDivisaCarrito = (e) => {
+    const divisaIdSelected = e.target.getAttribute('data-id')
+    const divisaSelected = divisas.find((divisa) => divisa.id == divisaIdSelected)
+    carrito.push(divisaSelected)
+    localStorage.setItem('carrito', JSON.stringify(carrito))
+
+}
+
+const agregarListenerBotones = () => {
+    const monedaButton = document.querySelectorAll('.menuTab')
+    monedaButton.forEach((button) =>{
+        button.addEventListener('click', renderizarDatosDivisas)
+    })   
+}
+
+cardCTA.addEventListener('click', agregarDivisaCarrito)
+
+renderizarListDivisas()
 

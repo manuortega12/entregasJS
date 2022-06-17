@@ -4,12 +4,14 @@
     box-sizing: border-box;
 }
 
-#contenedor, h1, div{
-    margin-top: 3rem;
-    text-align: center;
-}
-
-#verProd {
+/* .cajas {
     margin: 2rem;
     padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 5rem;
 }
+
+.titulo {
+    text-align: center;
+} */
